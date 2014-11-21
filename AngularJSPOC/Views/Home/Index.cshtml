@@ -1,0 +1,152 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h3>Angular JS Introduction</h3>
+        </div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">&nbsp;</h3></div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly. Angular's data binding and dependency injection eliminate much of the code you would otherwise have to write. And it all happens within the browser, making it an ideal partner with any server technology.</div>
+        <div class="col-lg-2">&nbsp;</div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-10">&nbsp;</div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">Angular is what HTML would have been had it been designed for applications. HTML is a great declarative language for static documents. It does not contain much in the way of creating applications, and as a result building web applications is an exercise in what do I have to do to trick the browser into doing what I want?</div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">&nbsp;</div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            The impedance mismatch between dynamic applications and static documents is often solved with:
+
+            a library - a collection of functions which are useful when writing web apps. Your code is in charge and it calls into the library when it sees fit. E.g., jQuery.
+            frameworks - a particular implementation of a web application, where your code fills in the details. The framework is in charge and it calls into your code when it needs something app specific. E.g., durandal, ember, etc.
+            Angular takes another approach. It attempts to minimize the impedance mismatch between document centric HTML and what an application needs by creating new HTML constructs. Angular teaches the browser new syntax through a construct we call directives. Examples include:
+
+            
+        </div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">&nbsp;</div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            Data binding, as in {{}}.
+            DOM control structures for repeating/hiding DOM fragments.
+            Support for forms and form validation.
+            Attaching new behavior to DOM elements, such as DOM event handling.
+            Grouping of HTML into reusable components.
+        </div>
+        <div class="col-lg-2">&nbsp;</div>
+    </div>
+</div>
+
+
+@*@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My Angular JS Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr") 
+         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-messages.js"></script>
+         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>   
+         <script type="text/javascript">
+             var getEmployeeListing = '@Url.Action("GetEmployees", "Employee")';
+             var saveEmployeeListing = '@Url.Action("Create", "Employee")';
+             var getStates = '@Url.Action("GetStates", "Employee")';             
+             var getEmployeeUrl = '/Employee/Edit/';
+             var deleteEmployeeUrl = '/Employee/Delete/';
+         </script>
+        <style>
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+            table tr:nth-child(odd) {
+                background-color: #f1f1f1;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+
+            a {
+                color: #a9a9a9;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #00A0C6;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            /*loading*/
+            #loading {background: #333;width: 10%;opacity: 0.8;position: absolute;top: 0;left: 0;z-index: 99999;}
+            #loading img { width:100px;    }
+    </style>
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("AngularJS Application", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Employee Listing", "Index", "Employee")</li>
+                            <li>@Html.ActionLink("Add Employee", "Create", "Employee")</li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            <section class="content-wrapper main-content clear-fix">
+                <h2>What Is Angular?</h2>
+            <p>AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly. Angular's data binding and dependency injection eliminate much of the code you would otherwise have to write. And it all happens within the browser, making it an ideal partner with any server technology.</p>
+
+            <p>Angular is what HTML would have been had it been designed for applications. HTML is a great declarative language for static documents. It does not contain much in the way of creating applications, and as a result building web applications is an exercise in what do I have to do to trick the browser into doing what I want?</p>
+               <div data-ng-view=""></div>
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+        
+        @Scripts.Render("~/bundles/jquery")        
+        @Scripts.Render("~/bundles/AngularJSPOC")
+    </body>
+</html>*@

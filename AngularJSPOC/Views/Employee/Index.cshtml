@@ -1,0 +1,30 @@
+﻿<div ng-controller="employeeCtrl" ng-init="employees()" class="container">
+    <h3>Employee Listing</h3>
+    <br />
+    <input type="text" style="width: 20%" ng-model="employee.Name" name="empName" placeholder="Search Name">
+    <input type="text" style="width: 20%" ng-model="employee.Email" name="empEmail" placeholder="Search Email">
+    <input type="text" style="width: 20%" ng-model="employee.State" ng-model-options="{ updateOn: 'blur' }" name="empState" placeholder="Search State">
+    {{status}}<br />
+    <br />
+    <div>
+        <div class="row">
+            <div class="col-lg-2"><strong>Name</strong></div>
+            <div class="col-lg-1"><strong>Age</strong></div>
+            <div class="col-lg-2"><strong>Email</strong></div>
+            <div class="col-lg-2"><strong>State</strong></div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3"></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row" ng-repeat="employee in employees|orderBy:'EmployeeId'|filter:employee.Name|filter:employee.Email|filter:employee.State">
+            <div class="col-lg-2">{{employee.EmployeeName}}</div>
+            <div class="col-lg-1">{{employee.EmployeeAge}}</div>
+            <div class="col-lg-2">{{employee.EmployeeEmail}}</div>
+            <div class="col-lg-2">{{employee.StateName}}</div>
+            <div class="col-lg-1"><a style="text-decoration: none" href="Employee/EditEmployee/{{employee.EmployeeId}}"><span class="glyphicon glyphicon-pencil"></span></a></div>
+            <div class="col-lg-1"><a style="text-decoration: none" ng-click="deleteEmployee(employee.EmployeeId)"><span class="glyphicon glyphicon-remove"></span></a></div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿<form name="empForm" role="form" novalidate>
+    <h3>Add/Edit Employee</h3>
+    <br />
+    <div class="container-fluid" ng-controller="employeeAddUpdateCtrl" ng-init="getEmployee('@ViewBag.EmpId')">
+        <div style="min-height:20px; margin-left:-15px">
+        <span ng-show="insertModeSuccess" class="bg-success">Employee saved successfully.</span>
+        <span ng-show="editModeSuccess"  class="bg-success">Employee updated successfully.</span>
+        <span ng-show="status.length">{{status}}</span></div>
+        <div id="divLoading" ng-show="loading">
+            <img class="loading" src="~/Content/loading.gif" style="margin-left: 25%; margin-top: 0%; position: absolute;" />
+        </div>
+        <input type="hidden" ng-model="employee.Id">
+        <div class="row">
+            <div class="form-group" ng-class="{ 'has-error' : empForm.empName.$invalid && (empForm.empName.$pristine||empForm.empName.$touched) && submitted }">
+                <label for="empName">Name:</label>
+                <input type="text" class="form-control input-md" ng-model="employee.Name" name="empName" required ng-minlength="5" ng-maxlength="30">
+            </div>
+            <div ng-show="empForm.empName.$invalid && (empForm.empName.$pristine||empForm.empName.$touched) && submitted" ng-messages="empForm.empName.$error" >
+                <div ng-message="required">Name is a mandatory field.</div>
+                <div ng-message="minlength">Name cannot be shorter than 6 characters.</div>
+                <div ng-message="maxlength">Name cannot be longer than 30 characters.</div>                
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : empForm.empAge.$invalid && (empForm.empAge.$pristine||empForm.empAge.$touched) && submitted }">
+                <label for="empAge">Age:</label>
+                <input type="number" class="form-control input-md" ng-model="employee.Age" name="empAge" required>
+            </div>
+            <div class="help-block" ng-show="empForm.empAge.$invalid && (empForm.empAge.$pristine||empForm.empAge.$touched) && submitted" ng-messages="empForm.empAge.$error" >
+                <div ng-message="required">Age is a mandatory field.</div>
+                <div ng-message="number">Enter only numbers for age.</div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : empForm.empEmail.$invalid && (empForm.empEmail.$pristine||empForm.empEmail.$touched) && submitted }">
+                <label for="empEmail">Email:</label>
+                <input type="email" class="form-control input-md" ng-model="employee.Email" name="empEmail" required ng-minlength="5" ng-maxlength="30">
+            </div>
+            <div class="help-block" ng-show="empForm.empEmail.$invalid && (empForm.empEmail.$pristine||empForm.empEmail.$touched) && submitted" ng-messages="empForm.empEmail.$error" >
+                <div ng-message="required">Email is a mandatory field.</div>
+                <div ng-message="minlength">Email cannot be shorter than 6 characters.</div>
+                <div ng-message="maxlength">Email cannot be longer than 30 characters.</div>
+                <div ng-message="email">Incorrect email format.</div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : empForm.empState.$invalid && (empForm.empState.$pristine||empForm.empState.$touched) && submitted }">
+                <label for="empState">State:</label>
+                <select name="empState" class="form-control input-md" ng-model="employee.StateId" ng-init="states()" ng-options="s.StateId as s.StateName for s in States" required>
+                    <option value="">Select State</option>
+                </select>
+            </div>
+            <div class="help-block" ng-show="empForm.empState.$invalid && (empForm.empState.$pristine||empForm.empState.$touched) && submitted" ng-messages="empForm.empState.$error" >
+                <div ng-message="required">State is a mandatory field.</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-show="insertMode" ng-click="saveEmployee(empForm.$valid)">Save</button>
+                <button type="submit" class="btn btn-primary" ng-hide="insertMode" ng-click="saveEmployee(empForm.$valid)">Update</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ @*            <div class="form-group">
+                <label for="empCountry">Country:</label>
+                <select name="empCountry" class="form-control input-md" ng-init="countries()" ng-model="employee.CountryId" ng-options="c as c.CountryName for c in Countries" ng-change="">
+                    <option value="">Select Country</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="empState">State:</label>
+                <select name="empState" class="form-control input-md" ng-model="employee.StateId" ng-disabled="!employee.CountryId" ng-options="s.StateId as s.StateName for s in employee.CountryId.States">
+                    <option value="">Select State</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="empName">Country:</label>
+                <select class="form-control input-md" ng-model="employee.CountryId" ng-init="countries()" ng-options="c.CountryId as c.CountryName for c in Countries" ng-change="states()" >
+                    <option value="">Select Country</option>
+                </select>
+            </div>*@
